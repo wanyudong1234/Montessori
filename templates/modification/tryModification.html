@@ -1,0 +1,382 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>蒙特梭利学生管理系统</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css"%}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static "dist/css/AdminLTE.min.css"%}">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect.
+  -->
+  <link rel="stylesheet" href="{% static "dist/css/skins/skin-blue.min.css"%}">
+
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <!-- Main Header -->
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="http://127.0.0.1:8001/homepage/" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>F</b>T</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Montessori</b></span>
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- The user image in the navbar-->
+              <img src="{% static "dist/img/user2-160x160.jpg" %}" class="user-image" alt="User Image">
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <span class="hidden-xs">管理员</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- The user image in the menu -->
+              <li class="user-header">
+                <img src="{% static "dist/img/user2-160x160.jpg" %}" class="img-circle" alt="User Image">
+
+                <p>
+                  管理员
+                </p>
+              </li>
+              <li class="user-footer">
+                <div class="pull-right">
+                  <a href="/logout/" class="btn btn-default btn-flat">退出登陆</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="{% static "dist/img/user2-160x160.jpg" %}" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>管理员</p>
+          <!-- Status -->
+          <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu">
+        <li class="header">导航栏</li>
+        <!-- Optionally, you can add icons to the links -->
+        <li><a href="/homepage/hoursList/"><i class="fa fa-link"></i> <span>课时学生管理</span></a></li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>课程学生管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/homepage/courseList/季卡">季卡</a></li>
+            <li><a href="/homepage/courseList/半年卡">半年卡</a></li>
+            <li><a href="/homepage/courseList/年卡">年卡</a></li>
+          </ul>
+        </li>
+        <li class="treeview"><a href="/homepage/tryList/"><i class="fa fa-link"></i> <span>试听学生管理</span></a></li>
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        学生管理列表
+      </h1>
+
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Your Page Content Here -->
+        <!-- Horizontal Form -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">学生信息修改</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal" action="" method="post">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="username" class="col-sm-2 control-label">姓名:</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="username" placeholder="姓名" value="{{ currentStudent.username }}" disabled>
+                  </div>
+                </div>
+
+                  <label for="sex" class="col-sm-2 control-label">&nbsp;&nbsp;</label>
+                  <p style="color: red">&nbsp;&nbsp;&nbsp;{{ errors }}</p>
+
+                <div class="form-group">
+                    <label for="sex" class="col-sm-2 control-label">性别:</label>
+
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="sex" id="male" value="男" checked>
+                      男
+                    </label>
+                  </div>
+
+                    <label for="sex" class="col-sm-2 control-label">&nbsp;&nbsp;</label>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="sex" id="female" value="女">
+                      女
+                    </label>
+                  </div>
+
+                    </br>
+
+
+                  <label for="phone_num" class="col-sm-2 control-label">联系电话:</label>
+                  <div class="col-sm-10">
+                    <input type="tel" class="form-control" name="phone_num" placeholder="电话" maxlength="11" value="{{ currentStudent.phone_num }}">
+                  </div>
+
+                    </br>
+                    </br>
+
+                  <label for="contact" class="col-sm-2 control-label">介绍人:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="contact" placeholder="介绍人" value="{{ currentStudent.contact }}">
+                  </div>
+
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+
+                  <label for="class_one" class="col-sm-2 control-label">课程1:</label>
+                    <div class="col-sm-10">
+                      <select class="form_control" name="class_one" >
+                          <option value="{{ currentStudent.try_class_one }}">--{{ currentStudent.try_class_one }}--</option>
+                        <option value="蒙氏">--蒙氏--</option>
+                        <option value="英语">--英语--</option>
+                        <option value="艺术">--艺术--</option>
+                        <option value="音乐">--音乐--</option>
+                      </select>
+                    </div>
+
+                    </br>
+                    </br>
+
+                     <label for="hasDoneOne" class="col-sm-2 control-label">课程1:</label>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="hasDoneOne" id="undoOne" value="未上" checked>
+                      未上
+                    </label>
+                  </div>
+                    <label for="hasDoneOne" class="col-sm-2 control-label">&nbsp;&nbsp;</label>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="hasDoneOne" id="doOne" value="已上">
+                      已上
+                    </label>
+                  </div>
+
+                    </br>
+
+                  <label for="classOneTeacher" class="col-sm-2 control-label">课程1任课老师:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="classOneTeacher" placeholder="老师姓名" value="{{ currentStudent.class_one_teacher }}">
+                  </div>
+
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+
+                  <label for="class_two" class="col-sm-2 control-label">课程2:</label>
+                    <div class="col-sm-10">
+                      <select class="form_control" name="class_two" >
+                        <option value="{{ currentStudent.try_class_two }}">--{{ currentStudent.try_class_two }}--</option>
+                        <option value="蒙氏">--蒙氏--</option>
+                        <option value="英语">--英语--</option>
+                        <option value="艺术">--艺术--</option>
+                        <option value="音乐">--音乐--</option>
+                      </select>
+                    </div>
+
+                    </br>
+                    </br>
+
+                    <label for="hasDoneTwo" class="col-sm-2 control-label">课程2:</label>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="hasDoneTwo" id="undoTwo" value="未上" checked>
+                      未上
+                    </label>
+                  </div>
+                    <label for="hasDoneTwo" class="col-sm-2 control-label">&nbsp;&nbsp;</label>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="hasDoneTwo" id="doTwo" value="已上">
+                      已上
+                    </label>
+                  </div>
+
+                    </br>
+
+                  <label for="classTwoTeacher" class="col-sm-2 control-label">课程2任课老师:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="classTwoTeacher" placeholder="老师姓名" value="{{ currentStudent.class_two_teacher }}">
+                  </div>
+
+                    </br>
+                    </br>
+
+                </div>
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <button type="button" class="btn btn-default" onclick="cancel()">取消</button>
+                <button type="submit" class="btn btn-info pull-right">确认</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+
+    </section>
+    <!-- /.content -->
+
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+      Anything you want
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2016 <a href="#">David</a>.</strong> All rights reserved.
+  </footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 2.2.3 -->
+<script src="{% static "plugins/jQuery/jquery-2.2.3.min.js"%}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{% static "bootstrap/js/bootstrap.min.js"%}"></script>
+<!-- AdminLTE App -->
+<script src="{% static "dist/js/app.min.js"%}"></script>
+
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+<script type="application/javascript">
+
+    var host = "127.0.0.1:8001"
+
+    function cancel() {
+        window.location = "http://"+host+"/homepage/tryList/";
+    }
+
+    $(function () {
+           var sex = '{{ currentStudent.sex }}'
+            if ( sex == '男'){
+                document.getElementById('male').checked = true
+            }else {
+                document.getElementById('female').checked = true
+            }
+
+            var hasDoneOne = '{{ currentStudent.try_class_one_state }}'
+            if (hasDoneOne == '未上'){
+                document.getElementById('undoOne').checked = true
+            }else {
+                document.getElementById('doOne').checked = true
+            }
+
+            var hasDoneTwo = '{{ currentStudent.try_class_two_state }}'
+            if (hasDoneTwo == '未上'){
+                document.getElementById('undoTwo').checked = true
+            }else {
+                document.getElementById('doTwo').checked = true
+            }
+        });
+
+</script>
+</body>
+</html>

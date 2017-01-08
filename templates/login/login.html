@@ -1,0 +1,49 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="{% static "bootstrap/css/vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="{% static "bootstrap/css/flat-ui.css" %}" rel="stylesheet">
+
+    <script src="{% static "bootstrap/js/vendor/jquery.min.js" %}"></script>
+    <!--
+    <script src="{% static "bootstrap/js/vendor/html5shiv.js"%}"></script>
+      <script src="{% static "bootstrap/js/vendor/respond.min.js" %}"></script>
+    -->
+    <script src="http://cdn.bootcss.com/bootstrap/2.3.1/js/bootstrap-transition.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/2.3.1/js/bootstrap-modal.js"></script>
+    <title>登陆</title>
+</head>
+<body style="background-color: #e7e7e7">
+        <div style="width:auto; height:60px; background-color:#2980B9">
+            <div class="navbar-header">
+                  <a class="navbar-brand" style="color: #ffffff" href="#">学生信息管理系统</a>
+            </div>
+        </div>
+
+        </br>
+
+        <center>
+            <h2>欢迎登陆</h2>
+        </center>
+
+        <div style="width: 310px; height:250px; top: 0; bottom: 0; right: 0; left: 0; margin: auto;">
+            <div class="login-form">
+
+                <form action="" method="post">
+                    <table>
+                        {{ form.as_table }}
+                    </table>
+                    </br>
+                    <input class="btn btn-primary btn-lg btn-block" type="submit" value="登陆">
+
+                </form>
+            </div>
+        </div>
+</body>
+</html>
