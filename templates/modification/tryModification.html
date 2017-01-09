@@ -204,12 +204,29 @@ desired effect
 
                     </br>
 
+                    <label for="birth_date" class="col-sm-2 control-label">出生年月:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="birth_date" placeholder="例：20个月" value="{{ currentStudent.birth_date }}">
+                  </div>
+
+                    </br>
+                    </br>
+                    </br>
+
+                    <label for="accompany" class="col-sm-2 control-label">陪同人员:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="accompany" placeholder="陪同人员" value="{{ currentStudent.accompany_username }}">
+                  </div>
+
+                    </br>
+
 
                   <label for="phone_num" class="col-sm-2 control-label">联系电话:</label>
                   <div class="col-sm-10">
                     <input type="tel" class="form-control" name="phone_num" placeholder="电话" maxlength="11" value="{{ currentStudent.phone_num }}">
                   </div>
 
+                    </br>
                     </br>
                     </br>
 
@@ -233,6 +250,14 @@ desired effect
                         <option value="音乐">--音乐--</option>
                       </select>
                     </div>
+
+                    </br>
+                    </br>
+
+                    <label for="one_class_time" class="col-sm-2 control-label">课程1上课时间:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="one_class_time" placeholder="例：周六9:30" value="{{ currentStudent.try_class_one_time }}">
+                  </div>
 
                     </br>
                     </br>
@@ -278,6 +303,14 @@ desired effect
                     </br>
                     </br>
 
+                    <label for="two_class_time" class="col-sm-2 control-label">课程2上课时间:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="two_class_time" placeholder="例：周六9:30" value="{{ currentStudent.try_class_two_time }}">
+                  </div>
+
+                    </br>
+                    </br>
+
                     <label for="hasDoneTwo" class="col-sm-2 control-label">课程2:</label>
                   <div class="radio">
                     <label>
@@ -302,6 +335,28 @@ desired effect
 
                     </br>
                     </br>
+
+                    </br>
+
+                    <label for="source" class="col-sm-2 control-label">来源:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="source" placeholder="例：美团" value="{{ currentStudent.source }}">
+                  </div>
+
+                    </br>
+
+                    <label for="unregister_reason" class="col-sm-2 control-label">未报课原因:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="unregister_reason" placeholder="" value="{{ currentStudent.unRegister_reason }}">
+                  </div>
+
+                    </br>
+                    </br>
+
+                    <label for="birth_date" class="col-sm-2 control-label">注册日期:</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" id="datepicker" name="register_date" value="{{ currentStudent.register_date |date:"Y-m-d"}}">
+                    </div>
 
                 </div>
               </div>

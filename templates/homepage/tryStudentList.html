@@ -223,6 +223,7 @@ desired effect
                       <th>课程2</th>
                       <th>状态</th>
                       <th>任课老师</th>
+                      <th>注册时间</th>
                       <th>&nbsp;&nbsp;操作</th>
                   </tr>
                   </thead>
@@ -239,6 +240,7 @@ desired effect
                       <td>{{ itemtry.try_class_two }}</td>
                       <td><span id="{{ itemtry.id }}two">{{ itemtry.try_class_two_state }}</span></td>
                       <td>{{ itemtry.class_two_teacher }}</td>
+                      <td>{{ itemtry.register_date|date:"Y-m-d" }}</td>
                       <td><a href="/tryModification/{{ itemtry.username }}">修改</a>&nbsp;|&nbsp;<a data-toggle="modal" data-target="#{{ itemtry.username }}mymodal" href="javascript:void(0)">删除</a></td>
                     </tr>
                     {% endfor %}

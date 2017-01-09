@@ -46,6 +46,14 @@ class TryStudent(models.Model):
     try_class_two_state = models.CharField(max_length=200, null=False, default="未上")
     class_two_teacher = models.CharField(max_length=200)
 
+    register_date = models.DateField(default="2016-11-11")
+    accompany_username = models.CharField(max_length=200, default="")
+    try_class_one_time = models.CharField(max_length=200, default="")
+    try_class_two_time = models.CharField(max_length=200, default="")
+    source = models.CharField(max_length=200, default="")
+    unRegister_reason = models.CharField(max_length=200, default="")
+    birth_date = models.CharField(max_length=200, default="0个月")
+
     def __unicode__(self):
         return self.username
 

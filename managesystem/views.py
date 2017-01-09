@@ -328,6 +328,15 @@ def TryRegister(request):
                     hasDoneTwo = request.POST['hasDoneTwo']
                     classTwoTeacher = request.POST['classTwoTeacher']
 
+                    # 新增代码 -- wanyudong 2017／01／09
+                    register_date = request.POST['register_date']
+                    accompany_username = request.POST['accompany']
+                    try_class_one_time = request.POST['one_class_time']
+                    try_class_two_time = request.POST['two_class_time']
+                    source = request.POST['source']
+                    unRegister_reason = request.POST['unregister_reason']
+                    birth_date = request.POST['birth_date']
+
                     # 保存学生信息
                     trySudentInstance.username = username
                     trySudentInstance.sex = sex
@@ -339,9 +348,18 @@ def TryRegister(request):
                     trySudentInstance.try_class_two = class_two
                     trySudentInstance.try_class_two_state = hasDoneTwo
                     trySudentInstance.class_two_teacher = classTwoTeacher
+
+                    trySudentInstance.register_date = register_date
+                    trySudentInstance.accompany_username = accompany_username
+                    trySudentInstance.try_class_one_time = try_class_one_time
+                    trySudentInstance.try_class_two_time = try_class_two_time
+                    trySudentInstance.source = source
+                    trySudentInstance.source = unRegister_reason
+                    trySudentInstance.birth_date = birth_date
+
                     trySudentInstance.save()
 
-                    return  HttpResponseRedirect('/homepage/')
+                    return  HttpResponseRedirect('/homepage/tryList/')
                 else:
                     error = "学生姓名已存在,请输入不同的名字"
             else:
@@ -384,6 +402,14 @@ def TryModification(request, username):
             hasDoneTwo = request.POST['hasDoneTwo']
             classTwoTeacher = request.POST['classTwoTeacher']
 
+            register_date = request.POST['register_date']
+            accompany_username = request.POST['accompany']
+            try_class_one_time = request.POST['one_class_time']
+            try_class_two_time = request.POST['two_class_time']
+            source = request.POST['source']
+            unRegister_reason = request.POST['unregister_reason']
+            birth_date = request.POST['birth_date']
+
             # 保存修改
             currentStudent.sex = sex
             currentStudent.phone_num = phone_num
@@ -394,6 +420,15 @@ def TryModification(request, username):
             currentStudent.try_class_two = class_two
             currentStudent.try_class_two_state = hasDoneTwo
             currentStudent.class_two_teacher = classTwoTeacher
+
+            currentStudent.register_date = register_date
+            currentStudent.accompany_username = accompany_username
+            currentStudent.try_class_one_time = try_class_one_time
+            currentStudent.try_class_two_time = try_class_two_time
+            currentStudent.source = source
+            currentStudent.source = unRegister_reason
+            currentStudent.birth_date = birth_date
+
             currentStudent.save()
             return HttpResponseRedirect('/homepage/tryList/')
         return render_to_response("modification/tryModification.html", {"currentStudent": currentStudent})
