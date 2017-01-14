@@ -22,7 +22,7 @@ from django.contrib import admin
 from managesystem.views import login, logout, HoursHomepage, HoursRegister, HoursStudentList, HoursPerson, \
     DailyClassAdd, delete_hours_student_homepage, delete_hours_daily, HoursModification, TryRegister, TryStudentList, \
     delete_try_student_homepage, TryModification, CourseRegister, CourseHomepage, CourseStudentCalender, DailyCourseAdd, CourseStudentList, \
-    delete_course_daily, CourseModification, delete_course_student_homepage
+    delete_course_daily, CourseModification, delete_course_student_homepage, statistics
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -76,5 +76,8 @@ urlpatterns = [
     url(r'^courseModification/(?P<flag>\w+)/(?P<username>\w+)$', CourseModification),
     # 删除 课时 学生
     url(r'^deleteCourseStudentHomepage/(?P<flag>\w+)/(?P<username>\w+)$',delete_course_student_homepage),
+
+    # 学生统计
+    url(r'^homepage/statistics/$', statistics),
 
 ]

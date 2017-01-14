@@ -83,3 +83,4 @@ class CourseDailyClass(models.Model):
 
     def __unicode__(self):
         return (self.owner.username +' '+str(self.consume_date) +' '+self.class_name)
+

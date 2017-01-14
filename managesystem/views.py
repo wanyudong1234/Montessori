@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from managesystem.models import HoursStudent, HoursDailyClass, TryStudent, CourseStudent, CourseDailyClass
-from managesystem.form import LoginForm
+from managesystem.form import LoginForm, StudentCount
 
 import datetime, calendar
 
@@ -643,3 +643,70 @@ def delete_course_student_homepage(request, flag, username):
     del_course_student.delete()
     del_course_daily.delete()
     return HttpResponseRedirect("/homepage/courseList/"+flag)
+
+# 学生统计
+def statistics(request):
+    if request.user.is_authenticated():
+        # 课时
+        allHourArr = []
+        allHourStudents = HoursStudent.objects.all()
+        hourd = {}
+        for item in allHourStudents:
+            registerDate = item.register_date
+            m = datetime.datetime.strftime(registerDate, "%Y-%m")
+            if hourd.has_key(m):
+                num = hourd[m]
+                num = num + 1
+                hourd[m] = num;
+            else:
+                hourd[m] = 1;
+        hourKeysArr = hourd.keys()
+        hourKeysArr = sorted(hourKeysArr, key=lambda x: datetime.datetime.strptime(x, "%Y-%m"))
+        for hourKey in hourKeysArr:
+            count = hourd[hourKey]
+            studentCount = StudentCount(hourKey, count)
+            allHourArr.append(studentCount)
+
+        # 课程
+        allCourseArr = []
+        allCourseStudents = CourseStudent.objects.all()
+        coursed = {}
+        for item in allCourseStudents:
+            registerDate = item.register_date
+            m = datetime.datetime.strftime(registerDate, "%Y-%m")
+            if coursed.has_key(m):
+                num = coursed[m]
+                num = num + 1
+                coursed[m] = num;
+            else:
+                coursed[m] = 1;
+        CourseKeysArr = coursed.keys()
+        CourseKeysArr = sorted(CourseKeysArr, key=lambda x: datetime.datetime.strptime(x, "%Y-%m"))
+        for courseKey in CourseKeysArr:
+            count = hourd[courseKey]
+            studentCount = StudentCount(courseKey, count)
+            allCourseArr.append(studentCount)
+
+        # 试听
+        allTryArr = []
+        allTryStudents = TryStudent.objects.all();
+        d = {}
+        for item in allTryStudents:
+            registerDate = item.register_date
+            m=datetime.datetime.strftime(registerDate,"%Y-%m")
+            if d.has_key(m):
+                num = d[m]
+                num = num + 1
+                d[m] = num;
+            else:
+                d[m] = 1;
+        tryKeysArr = d.keys()
+        tryKeysArr = sorted(tryKeysArr, key=lambda x: datetime.datetime.strptime(x, "%Y-%m"))
+        for tryKey in  tryKeysArr:
+            count = d[tryKey]
+            studentCount = StudentCount(tryKey, count)
+            allTryArr.append(studentCount)
+
+        return render_to_response("statistics/statistics.html",{"allHourArr":allHourArr,"allCourseArr":allCourseArr, "allTryArr":allTryArr})
+    else:
+        return HttpResponseRedirect('/')

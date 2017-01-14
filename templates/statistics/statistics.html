@@ -125,18 +125,6 @@ desired effect
         </div>
       </div>
 
-      <!-- search form (Optional) -->
-      <form action="" method="post" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="keywords" class="form-control" placeholder="学生姓名搜索...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
         <li class="header">导航栏</li>
@@ -166,40 +154,18 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        学生管理列表
+        学生统计
       </h1>
 
     </section>
 
-      <!-- 删除提示框 -->
-      {% for item in studentList %}
-        <div class="modal" id="{{ item.username }}mymodal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
-                        <h4 class="modal-title">提示</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>确认要删除吗?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary" onclick="delete_student('{{ item.username }}')">&nbsp;&nbsp;确定&nbsp;&nbsp;</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-    {% endfor %}
-
     <!-- Main content -->
     <section class="content">
 
-      <!-- Your Page Content Here -->
-        <!-- TABLE: LATEST ORDERS -->
-          <div class="box box-info">
+        <!-- BAR CHART -->
+          <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">试听学生</h3>
+              <h3 class="box-title">课时学生统计</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -207,60 +173,39 @@ desired effect
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
-            <!-- /.box-header -->
             <div class="box-body">
-              <div class="table-responsive">
-                <table class="table no-margin">
-                  <thead>
-                  <tr>
-                      <th>学生姓名</th>
-                      <th>性别</th>
-                      <th>联系方式</th>
-                      <th>介绍老师</th>
-                      <th>课程1</th>
-                      <th>状态</th>
-                      <th>任课老师</th>
-                      <th>课程2</th>
-                      <th>状态</th>
-                      <th>任课老师</th>
-                      <th>注册时间</th>
-                      <th>&nbsp;&nbsp;操作</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    {% for itemtry in studentList %}
-                    <tr>
-                      <td><a>{{ itemtry.username }}</a></td>
-                      <td>{{ itemtry.sex }}</td>
-                      <td>{{ itemtry.phone_num }}</td>
-                      <td>{{ itemtry.contact }}</td>
-                      <td>{{ itemtry.try_class_one }}</td>
-                      <td><span id="{{ itemtry.id }}one">{{ itemtry.try_class_one_state }}</span></td>
-                      <td>{{ itemtry.class_one_teacher }}</td>
-                      <td>{{ itemtry.try_class_two }}</td>
-                      <td><span id="{{ itemtry.id }}two">{{ itemtry.try_class_two_state }}</span></td>
-                      <td>{{ itemtry.class_two_teacher }}</td>
-                      <td>{{ itemtry.register_date|date:"Y-m-d" }}</td>
-                      <td><a href="/tryModification/{{ itemtry.username }}">修改</a>&nbsp;|&nbsp;<a data-toggle="modal" data-target="#{{ itemtry.username }}mymodal" href="javascript:void(0)">删除</a></td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
+              <div class="chart">
+                <canvas id="hourBarChart" style="height:230px"></canvas>
               </div>
-              <!-- /.table-responsive -->
             </div>
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <a href="/tryRegister/" class="btn btn-sm btn-info btn-flat pull-left">新增</a>
+          </div>
+          <!-- /.box -->
+
+        <!-- BAR CHART -->
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">课程学生统计</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
             </div>
-            <!-- /.box-footer -->
+            <div class="box-body">
+              <div class="chart">
+                <canvas id="courseBarChart" style="height:230px"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
           </div>
           <!-- /.box -->
 
     <!-- BAR CHART -->
           <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title"> 学生统计</h3>
+              <h3 class="box-title">试听学生统计</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -344,9 +289,14 @@ desired effect
 
         {% endfor %}
 
+    <!--课时学生-->
+    var hourAreaChartData = {
+      labels: [
+          {% for item in allHourArr %}
+              "{{ item.flag }}月",
+          {% endfor %}
 
-    var areaChartData = {
-      labels: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+      ],
       datasets: [
         {
           label: "学生人数",
@@ -356,7 +306,144 @@ desired effect
           pointStrokeColor: "rgba(60,141,188,1)",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(60,141,188,1)",
-          data: [28, 48, 40, 19, 86, 27, 190]
+          data: [{% for item in allHourArr %}
+              {{ item.count }},
+          {% endfor %}]
+        }
+      ]
+    };
+
+
+    //-------------
+    //- BAR CHART -
+    //-------------
+    var hourBarChartCanvas = $("#hourBarChart").get(0).getContext("2d");
+    var hourBarChart = new Chart(hourBarChartCanvas);
+    var hourBarChartData = hourAreaChartData;
+    hourBarChartData.datasets[0].fillColor = "#E38E28";
+    hourBarChartData.datasets[0].strokeColor = "#E38E28";
+    hourBarChartData.datasets[0].pointColor = "#E38E28";
+    var hourBarChartOptions = {
+      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+      scaleBeginAtZero: true,
+      //Boolean - Whether grid lines are shown across the chart
+      scaleShowGridLines: true,
+      //String - Colour of the grid lines
+      scaleGridLineColor: "rgba(0,0,0,.05)",
+      //Number - Width of the grid lines
+      scaleGridLineWidth: 1,
+      //Boolean - Whether to show horizontal lines (except X axis)
+      scaleShowHorizontalLines: true,
+      //Boolean - Whether to show vertical lines (except Y axis)
+      scaleShowVerticalLines: true,
+      //Boolean - If there is a stroke on each bar
+      barShowStroke: true,
+      //Number - Pixel width of the bar stroke
+      barStrokeWidth: 2,
+      //Number - Spacing between each of the X value sets
+      barValueSpacing: 5,
+      //Number - Spacing between data sets within X values
+      barDatasetSpacing: 1,
+      //String - A legend template
+
+      //Boolean - whether to make the chart responsive
+      responsive: true,
+      maintainAspectRatio: true
+    };
+
+    hourBarChartOptions.datasetFill = false;
+    hourBarChart.Bar(hourBarChartData, hourBarChartOptions);
+
+
+    <!--课程学生-->
+    var courseAreaChartData = {
+      labels: [
+          {% for item in allCourseArr %}
+              "{{ item.flag }}月",
+          {% endfor %}
+
+      ],
+      datasets: [
+        {
+          label: "学生人数",
+          fillColor: "rgba(60,141,188,0.9)",
+          strokeColor: "rgba(60,141,188,0.8)",
+          pointColor: "#3b8bba",
+          pointStrokeColor: "rgba(60,141,188,1)",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(60,141,188,1)",
+          data: [{% for item in allCourseArr %}
+              {{ item.count }},
+          {% endfor %}]
+        }
+      ]
+    };
+
+
+    //-------------
+    //- BAR CHART -
+    //-------------
+    var courseBarChartCanvas = $("#courseBarChart").get(0).getContext("2d");
+    var courseBarChart = new Chart(courseBarChartCanvas);
+    var courseBarChartData = courseAreaChartData;
+    courseBarChartData.datasets[0].fillColor = "#DC604B";
+    courseBarChartData.datasets[0].strokeColor = "#DC604B";
+    courseBarChartData.datasets[0].pointColor = "#DC604B";
+    var courseBarChartOptions = {
+      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+      scaleBeginAtZero: true,
+      //Boolean - Whether grid lines are shown across the chart
+      scaleShowGridLines: true,
+      //String - Colour of the grid lines
+      scaleGridLineColor: "rgba(0,0,0,.05)",
+      //Number - Width of the grid lines
+      scaleGridLineWidth: 1,
+      //Boolean - Whether to show horizontal lines (except X axis)
+      scaleShowHorizontalLines: true,
+      //Boolean - Whether to show vertical lines (except Y axis)
+      scaleShowVerticalLines: true,
+      //Boolean - If there is a stroke on each bar
+      barShowStroke: true,
+      //Number - Pixel width of the bar stroke
+      barStrokeWidth: 2,
+      //Number - Spacing between each of the X value sets
+      barValueSpacing: 5,
+      //Number - Spacing between data sets within X values
+      barDatasetSpacing: 1,
+      //String - A legend template
+
+      //Boolean - whether to make the chart responsive
+      responsive: true,
+      maintainAspectRatio: true
+    };
+
+    courseBarChartOptions.datasetFill = false;
+    courseBarChart.Bar(courseBarChartData, courseBarChartOptions);
+
+
+
+
+    <!--试听学生-->
+
+    var areaChartData = {
+      labels: [
+          {% for item in allTryArr %}
+              "{{ item.flag }}月",
+          {% endfor %}
+
+      ],
+      datasets: [
+        {
+          label: "学生人数",
+          fillColor: "rgba(60,141,188,0.9)",
+          strokeColor: "rgba(60,141,188,0.8)",
+          pointColor: "#3b8bba",
+          pointStrokeColor: "rgba(60,141,188,1)",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(60,141,188,1)",
+          data: [{% for item in allTryArr %}
+              {{ item.count }},
+          {% endfor %}]
         }
       ]
     };
